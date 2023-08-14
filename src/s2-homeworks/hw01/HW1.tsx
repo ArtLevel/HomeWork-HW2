@@ -1,8 +1,11 @@
 import React from 'react'
+
 import Message from './message/Message'
 import MessageSender from './message-sender/MessageSender'
-import s2 from '../../s1-main/App.module.css'
 import FriendMessage from './friend-message/FriendMessage'
+
+import s from './HW1.module.css'
+import s2 from '../../s1-main/App.module.css'
 import avatar from './avatar.png'
 
 /*
@@ -28,7 +31,7 @@ export const message0: MessageType = {
 	},
 	message: {
 		text: 'some textsome textsome textsome textsome textsome textsome text',
-		time: '22:00',
+		time: '17:30',
 	},
 }
 export const friendMessage0: MessageType = {
@@ -39,14 +42,15 @@ export const friendMessage0: MessageType = {
 	},
 	message: {
 		text: 'зеркальное сообщение для тренировки css',
-		time: '22:00',
+		time: '19:00',
 	},
 }
 
 const HW1 = () => {
 	return (
-		<div id={'hw1'}>
+		<div id={'hw1'} className={s.wrapper}>
 			<div className={s2.hwTitle}>Homework #1</div>
+			<hr/>
 			<div className={s2.hw}>
 				{/*проверка отображения (не менять)*/}
 				<div>

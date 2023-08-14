@@ -1,31 +1,40 @@
 .message {
+    width: auto;
+    height: auto;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: end;
 }
 
 .imageAndText {
+    display: flex;
 
+    gap: 20px;
 }
 
 .imageAndText img {
+    max-width: 50px;
+    max-height: 50px;
 
+    order: 1;
 }
 
 .text {
+    padding: 10px;
 
-}
-
-.text:after {
-
+    color: white;
+    border-radius: 15px;
+    border-bottom-right-radius: 0px;
+    background-color: rgb(0, 102, 204);
 }
 
 .name {
-
-}
-
-.messageText {
-
+    font-weight: bold;
 }
 
 .time {
-
+    margin-right: 5px;
 }
