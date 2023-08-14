@@ -8,10 +8,6 @@ import s from './HW1.module.css'
 import s2 from '../../s1-main/App.module.css'
 import avatar from './avatar.png'
 
-/*
-* 5 - сделать стили в соответствии с дизайном
-* */
-
 export type MessageType = {
 	id: number,
 	user: {
@@ -23,6 +19,7 @@ export type MessageType = {
 		time: string,
 	},
 }
+
 export const message0: MessageType = {
 	id: 0,
 	user: {
