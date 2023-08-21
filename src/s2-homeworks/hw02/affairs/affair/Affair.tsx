@@ -1,49 +1,44 @@
 import React from 'react'
-import { AffairType } from '../../HW2'
+import {AffairType} from '../../HW2'
 import s from './Affair.module.css'
 import s2 from '../Affairs.module.css'
 
 type AffairPropsType = {
-    // key не нужно типизировать
-    affair: AffairType
-    deleteAffairCallback: any // need to fix any
+	// key не нужно типизировать
+	affair: AffairType
+	deleteAffairCallback: (_id: AffairType['_id']) => void
 }
 
 function Affair(props: AffairPropsType) {
-    const deleteCallback = () => {
-        // need to fix
-    }
+	const {affair, deleteAffairCallback, ...restProps} = props
 
-    const nameClass = s.name + ' ' + s2[props.affair.priority]
-    const buttonClass = s.closeButton + ' ' + s2[props.affair.priority]
-    const affairClass = s.affair + ' ' + s2[props.affair.priority]
+	const deleteCallback = () => deleteAffairCallback(affair._id)
 
-    return (
-        <div
-            id={'hw2-affair-' + props.affair._id}
-            className={affairClass}
-        >
-            <div id={'hw2-name-' + props.affair._id} className={nameClass}>
-                {/*создаёт студент*/}
+	const nameClass = s.name + ' ' + s2[affair.priority]
+	const buttonClass = s.closeButton + ' ' + s2[affair.priority]
+	const affairClass = s.affair + ' ' + s2[affair.priority]
 
-                {/**/}
-            </div>
-            <div id={'hw2-priority-' + props.affair._id} hidden>
-                {props.affair.priority}
-            </div>
+	return (
+		<div
+			id={'hw2-affair-' + affair._id}
+			className={affairClass}
+		>
+			<div id={'hw2-name-' + affair._id} className={nameClass}>
+				{affair.name}
+			</div>
+			<div id={'hw2-priority-' + affair._id} hidden>
+				{affair.priority}
+			</div>
 
-            <button
-                id={'hw2-button-delete-' + props.affair._id}
-                className={buttonClass}
-                // need to fix
-
-            >
-                {/*текст кнопки могут изменить студенты*/}
-                X
-                {/**/}
-            </button>
-        </div>
-    )
+			<button
+				id={'hw2-button-delete-' + affair._id}
+				className={buttonClass}
+				onClick={deleteCallback}
+			>
+				x
+			</button>
+		</div>
+	)
 }
 
 export default Affair
