@@ -8,12 +8,15 @@
 }
 
 .input {
+
 }
 
 .input:focus {
 }
 
 .errorInput {
+    color: red;
+    outline: #cc0000;
 }
 
 .button {

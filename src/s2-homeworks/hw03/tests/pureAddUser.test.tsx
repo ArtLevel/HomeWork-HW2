@@ -37,6 +37,7 @@ test('name 2', () => {
 test('name 3', () => {
     name = '    '
     pureAddUser(name, setError, setName, addUserCallback)
+
     expect(name).toBe('    ')
     expect(error).toBe('Ошибка! Введите имя!')
     expect(added).toBe(false)

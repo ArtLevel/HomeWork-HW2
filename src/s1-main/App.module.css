@@ -9,3 +9,12 @@
 .hwTitle {
 
 }
+
+.hw3 {
+    margin-top: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
