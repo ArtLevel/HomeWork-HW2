@@ -1,6 +1,6 @@
 import React from 'react'
 import Affair from './affair/Affair'
-import {AffairType, FilterType} from '../HW2'
+import { AffairType, FilterType } from '../HW2'
 import s from './Affairs.module.css'
 
 type AffairsPropsType = {
@@ -11,17 +11,21 @@ type AffairsPropsType = {
 }
 
 function Affairs(props: AffairsPropsType) {
-	const {data, setFilter, deleteAffairCallback, filter, ...restProps} = props
+	const { data, setFilter, deleteAffairCallback, filter, ...restProps } = props
 
 	const setAll = () => setFilter('all')
 	const setHigh = () => setFilter('high')
 	const setMiddle = () => setFilter('middle')
 	const setLow = () => setFilter('low')
 
-	const cnAll = s.button + ' ' + s.all + (filter === 'all' ? ' ' + s.active : '')
-	const cnHigh = s.button + ' ' + s.high + (filter === 'high' ? ' ' + s.active : '')
-	const cnMiddle = s.button + ' ' + s.middle + (filter === 'middle' ? ' ' + s.active : '')
-	const cnLow = s.button + ' ' + s.low + (filter === 'low' ? ' ' + s.active : '')
+	const cnAll =
+		s.button + ' ' + s.all + (filter === 'all' ? ' ' + s.active : '')
+	const cnHigh =
+		s.button + ' ' + s.high + (filter === 'high' ? ' ' + s.active : '')
+	const cnMiddle =
+		s.button + ' ' + s.middle + (filter === 'middle' ? ' ' + s.active : '')
+	const cnLow =
+		s.button + ' ' + s.low + (filter === 'low' ? ' ' + s.active : '')
 
 	const mappedAffairs = data.map((a: AffairType) => (
 		<Affair
@@ -34,18 +38,10 @@ function Affairs(props: AffairsPropsType) {
 	return (
 		<div>
 			<div className={s.buttonContainer}>
-				<button
-					id={'hw2-button-all'}
-					onClick={setAll}
-					className={cnAll}
-				>
+				<button id={'hw2-button-all'} onClick={setAll} className={cnAll}>
 					All
 				</button>
-				<button
-					id={'hw2-button-high'}
-					onClick={setHigh}
-					className={cnHigh}
-				>
+				<button id={'hw2-button-high'} onClick={setHigh} className={cnHigh}>
 					High
 				</button>
 				<button
@@ -55,11 +51,7 @@ function Affairs(props: AffairsPropsType) {
 				>
 					Middle
 				</button>
-				<button
-					id={'hw2-button-low'}
-					onClick={setLow}
-					className={cnLow}
-				>
+				<button id={'hw2-button-low'} onClick={setLow} className={cnLow}>
 					Low
 				</button>
 			</div>
