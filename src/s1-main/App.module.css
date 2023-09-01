@@ -5,4 +5,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 50px;
+}
+
+.wrapperHW2 {
+    width: 80%;
+    height: 100%;
 }
