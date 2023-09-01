@@ -4,9 +4,9 @@
     padding: 10px;
 
     color: white;
-    border: 2px solid transparent;
     border-radius: 5px;
     background-color: #0066cc;
+    border: 2px solid transparent;
 }
 
 .disabled {
