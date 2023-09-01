@@ -4,7 +4,7 @@
     padding: 10px;
 
     color: white;
-    border: 0;
+    border: 2px solid transparent;
     border-radius: 5px;
     background-color: #0066cc;
 }
@@ -16,7 +16,7 @@
 .secondary {
     color: #0066cc;
     background-color: white;
-    border: 2px solid #0066cc;
+    border-color: #0066cc;
 }
 
 .default {
@@ -31,23 +31,28 @@
     background-color: #004992;
 }
 
+.default:active {
+    color: #0066cc;
+    background-color: white;
+    border-color: #0066cc;
+}
+
 .red:hover {
     background-color: #ac1800;
 }
 
 .secondary:hover {
-
-}
-
-
-.default:active {
-
+    color: white;
+    background-color: #0066cc;
 }
 
 .secondary:active {
-
+    color: #0066cc;
+    background-color: white;
 }
 
 .red:active {
-
+    color: red;
+    background-color: white;
+    border-color: red;
 }
