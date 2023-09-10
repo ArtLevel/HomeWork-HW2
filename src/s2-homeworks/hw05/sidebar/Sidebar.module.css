@@ -1,7 +1,18 @@
 .sidebar {
+    width: 20%;
+    height: 100%;
+
+    display: none;
+    flex-direction: column;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #84cccd;
 }
 
 .sidebar.open {
+    display: flex;
 }
 
 .background {
@@ -11,13 +22,17 @@
 }
 
 .nav a {
+    color: black;
 }
 
 .nav a:hover {
+    color: #84cccd;
 }
 
 .nav a.active {
+    color: #0059b2;
 }
+
 .close {
 }
 
