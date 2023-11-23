@@ -13,7 +13,9 @@ export const PATH = {
 
 function Pages() {
 	return (
-		<div>
+		<div style={{
+			maxWidth: '1200px', width: '100%'
+		}}>
 			<Routes>
 				<Route path='/' element={<PreJunior />} />
 
