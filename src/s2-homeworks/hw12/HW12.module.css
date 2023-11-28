@@ -19,5 +19,15 @@ html {
 }
 
 .select {
+    width: 100px;
+    height: 40px;
 
+    display: flex;
+    text-align-last: center;
+
+    border: none;
+    border-radius: 5px;
+
+    color: var(--background);
+    background-color: var(--color);
 }
