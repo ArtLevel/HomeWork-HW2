@@ -38,14 +38,14 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                baseErrorHandler('200', success200, `...всё ок)\n код 200 - обычно означает что скорее всего всё ок)`)
+                baseErrorHandler('200', success200, `...всё ок)`)
             })
             .catch((e: AxiosError) => {
                 if(e.code === 'ERR_BAD_RESPONSE') {
-                    baseErrorHandler('500', error500, `эмитация ошибки на сервере\n ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)`)
+                    baseErrorHandler('500', error500, `эмитация ошибки на сервере`)
                 }
                 if(e.code === 'ERR_BAD_REQUEST') {
-                    baseErrorHandler('400', error400, `Ты не отправил success в body вообще!\n ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!`)
+                    baseErrorHandler('400', error400, `Ты не отправил success в body вообще!`)
                 }
                 if(e.code === 'ERR_NETWORK') {
                     baseErrorHandler('Error!', errorUnknown, `Network Error\n AxiosError`)
