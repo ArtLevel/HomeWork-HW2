@@ -18,10 +18,11 @@ const HW13 = () => {
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
 
-    const baseErrorHandler = (codeText: string, image: string, infoText: string) => {
-        setCode(codeText)
+    const baseErrorHandler = (statusCode: string, image: string, text: string, info: string) => {
+        setCode(statusCode)
         setImage(image)
-        setInfo(infoText)
+        setInfo(info)
+        setText(text)
     }
 
     const send = (x?: boolean | null) => () => {
@@ -38,27 +39,31 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                baseErrorHandler(String(res.status), success200, res.data.errorText)
+                const errorInfo = res.data.info
+                const errorText = res.data.errorText
+
+                baseErrorHandler(String(res.status), success200, errorText, errorInfo)
             })
             .catch((e: AxiosError<{
                 errorText: string
                 info: string
             }>) => {
                 if(e.response?.data) {
+                    const errorInfo = e.response.data.info
                     const errorText = e.response.data.errorText
                     const codeError = String(e.response.status)
 
                     if(e.code === 'ERR_BAD_RESPONSE') {
-                        baseErrorHandler(codeError, error500, errorText)
+                        baseErrorHandler(codeError, error500, errorText, errorInfo)
                     }
                     if(e.code === 'ERR_BAD_REQUEST') {
-                        baseErrorHandler(codeError, error400, errorText)
+                        baseErrorHandler(codeError, error400, errorText, errorInfo)
                     }
                     if(e.code === 'ERR_NETWORK') {
-                        baseErrorHandler(codeError, errorUnknown, errorText)
+                        baseErrorHandler(codeError, errorUnknown, errorText, errorInfo)
                     }
                 } else if(e.code === 'ERR_NETWORK') {
-                    baseErrorHandler('Error!', errorUnknown, e.message)
+                    baseErrorHandler('Error!', errorUnknown, e.message, e.name)
                 }
 
             })
