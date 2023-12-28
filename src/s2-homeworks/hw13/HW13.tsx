@@ -38,7 +38,7 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                baseErrorHandler('200', success200, `...всё ок)`)
+                baseErrorHandler(String(res.status), success200, res.data.errorText)
             })
             .catch((e: AxiosError<{
                 errorText: string
@@ -46,16 +46,16 @@ const HW13 = () => {
             }>) => {
                 if(e.response?.data) {
                     const errorText = e.response.data.errorText
-                    const errorInfo = e.response.data.info
+                    const codeError = String(e.response.status)
 
                     if(e.code === 'ERR_BAD_RESPONSE') {
-                        baseErrorHandler(errorText, error500, errorInfo)
+                        baseErrorHandler(codeError, error500, errorText)
                     }
                     if(e.code === 'ERR_BAD_REQUEST') {
-                        baseErrorHandler(errorText, error400, errorInfo)
+                        baseErrorHandler(codeError, error400, errorText)
                     }
                     if(e.code === 'ERR_NETWORK') {
-                        baseErrorHandler(errorText, errorUnknown, errorInfo)
+                        baseErrorHandler(codeError, errorUnknown, errorText)
                     }
                 } else if(e.code === 'ERR_NETWORK') {
                     baseErrorHandler('Error!', errorUnknown, e.message)
