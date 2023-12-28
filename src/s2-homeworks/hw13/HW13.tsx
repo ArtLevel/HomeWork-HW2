@@ -2,15 +2,13 @@ import React, {useState} from 'react'
 import s2 from '../../s1-main/App.module.css'
 import s from './HW13.module.css'
 import SuperButton from '../hw04/common/c2-SuperButton/SuperButton'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import success200 from './images/200.svg'
 import error400 from './images/400.svg'
 import error500 from './images/500.svg'
 import errorUnknown from './images/error.svg'
 
 /*
-* 1 - дописать функцию send
-* 2 - дизэйблить кнопки пока идёт запрос
 * 3 - сделать стили в соответствии с дизайном
 * */
 
@@ -19,6 +17,12 @@ const HW13 = () => {
     const [text, setText] = useState('')
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
+
+    const baseErrorHandler = (codeText: string, image: string, infoText: string) => {
+        setCode(codeText)
+        setImage(image)
+        setInfo(infoText)
+    }
 
     const send = (x?: boolean | null) => () => {
         const url =
@@ -34,14 +38,22 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                setCode('Код 200!')
-                setImage(success200)
-                // дописать
-
+                baseErrorHandler('Код 200!', success200, '...всё ок)\n' +
+                  'код 200 - обычно означает что скорее всего всё ок)')
             })
-            .catch((e) => {
-                // дописать
-
+            .catch((e: AxiosError) => {
+                if(e.code === 'ERR_BAD_RESPONSE') {
+                    baseErrorHandler('Ошибка 400!', error400, 'Ты не отправил success в body вообще!\n' +
+                      'ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!')
+                }
+                if(e.code === 'ERR_BAD_REQUEST') {
+                    baseErrorHandler('Ошибка 500!', error500, 'эмитация ошибки на сервере\n' +
+                      'ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)')
+                }
+                if(e.code === 'ERR_NETWORK') {
+                    baseErrorHandler('Error!', errorUnknown, 'Network Error\n' +
+                      'AxiosError')
+                }
             })
     }
 
@@ -55,8 +67,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
-                        // дописать
-
+                        disabled={info === '...loading'}
                     >
                         Send true
                     </SuperButton>
@@ -64,8 +75,7 @@ const HW13 = () => {
                         id={'hw13-send-false'}
                         onClick={send(false)}
                         xType={'secondary'}
-                        // дописать
-
+                        disabled={info === '...loading'}
                     >
                         Send false
                     </SuperButton>
@@ -73,8 +83,7 @@ const HW13 = () => {
                         id={'hw13-send-undefined'}
                         onClick={send(undefined)}
                         xType={'secondary'}
-                        // дописать
-
+                        disabled={info === '...loading'}
                     >
                         Send undefined
                     </SuperButton>
@@ -82,8 +91,7 @@ const HW13 = () => {
                         id={'hw13-send-null'}
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
-                        // дописать
-
+                        disabled={info === '...loading'}
                     >
                         Send null
                     </SuperButton>
