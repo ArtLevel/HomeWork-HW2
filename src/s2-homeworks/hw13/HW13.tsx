@@ -37,36 +37,21 @@ const HW13 = () => {
         setInfo('...loading')
 
         axios
-            .post(url, {success: x})
-            .then((res) => {
-                const errorInfo = res.data.info
-                const errorText = res.data.errorText
-
-                baseErrorHandler(String(res.status), success200, errorText, errorInfo)
-            })
-            .catch((e: AxiosError<{
-                errorText: string
-                info: string
-            }>) => {
-                if(e.response?.data) {
-                    const errorInfo = e.response.data.info
-                    const errorText = e.response.data.errorText
-                    const codeError = String(e.response.status)
-
-                    if(e.code === 'ERR_BAD_RESPONSE') {
-                        baseErrorHandler(codeError, error500, errorText, errorInfo)
-                    }
-                    if(e.code === 'ERR_BAD_REQUEST') {
-                        baseErrorHandler(codeError, error400, errorText, errorInfo)
-                    }
-                    if(e.code === 'ERR_NETWORK') {
-                        baseErrorHandler(codeError, errorUnknown, errorText, errorInfo)
-                    }
-                } else if(e.code === 'ERR_NETWORK') {
-                    baseErrorHandler('Error!', errorUnknown, e.message, e.name)
-                }
-
-            })
+          .post(url, {success: x})
+          .then((res) => {
+              baseErrorHandler('200', success200, '...всё ок)', 'код 200 - обычно означает что скорее всего всё ок)')
+          })
+          .catch((e: AxiosError) => {
+              if(e.code === 'ERR_BAD_RESPONSE') {
+                  baseErrorHandler('500', error400, 'Ты не отправил success в body вообще!', 'ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!')
+              }
+              if(e.code === 'ERR_BAD_REQUEST') {
+                  baseErrorHandler('400', error500, 'эмитация ошибки на сервере', 'ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)')
+              }
+              if(e.code === 'ERR_NETWORK') {
+                  baseErrorHandler('Error!', errorUnknown, 'Network Error', 'AxiosError')
+              }
+          })
     }
 
     return (
