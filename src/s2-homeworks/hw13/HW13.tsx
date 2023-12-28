@@ -42,14 +42,10 @@ const HW13 = () => {
             })
             .catch((e: AxiosError) => {
                 if(e.code === 'ERR_BAD_RESPONSE') {
-                    baseErrorHandler('500', error400, `
-                    Ты не отправил success в body вообще!\n ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!
-                    `)
+                    baseErrorHandler('500', error500, `эмитация ошибки на сервере\n ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)`)
                 }
                 if(e.code === 'ERR_BAD_REQUEST') {
-                    baseErrorHandler('400', error500, `
-                    эмитация ошибки на сервере\n ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)
-                    `)
+                    baseErrorHandler('400', error400, `Ты не отправил success в body вообще!\n ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!`)
                 }
                 if(e.code === 'ERR_NETWORK') {
                     baseErrorHandler('Error!', errorUnknown, `Network Error\n AxiosError`)
