@@ -40,16 +40,27 @@ const HW13 = () => {
             .then((res) => {
                 baseErrorHandler('200', success200, `...всё ок)`)
             })
-            .catch((e: AxiosError) => {
-                if(e.code === 'ERR_BAD_RESPONSE') {
-                    baseErrorHandler('500', error500, `эмитация ошибки на сервере`)
+            .catch((e: AxiosError<{
+                errorText: string
+                info: string
+            }>) => {
+                if(e.response?.data) {
+                    const errorText = e.response.data.errorText
+                    const errorInfo = e.response.data.info
+
+                    if(e.code === 'ERR_BAD_RESPONSE') {
+                        baseErrorHandler(errorText, error500, errorInfo)
+                    }
+                    if(e.code === 'ERR_BAD_REQUEST') {
+                        baseErrorHandler(errorText, error400, errorInfo)
+                    }
+                    if(e.code === 'ERR_NETWORK') {
+                        baseErrorHandler(errorText, errorUnknown, errorInfo)
+                    }
+                } else if(e.code === 'ERR_NETWORK') {
+                    baseErrorHandler('Error!', errorUnknown, e.message)
                 }
-                if(e.code === 'ERR_BAD_REQUEST') {
-                    baseErrorHandler('400', error400, `Ты не отправил success в body вообще!`)
-                }
-                if(e.code === 'ERR_NETWORK') {
-                    baseErrorHandler('Error!', errorUnknown, `Network Error\n AxiosError`)
-                }
+
             })
     }
 
